@@ -1,0 +1,17 @@
+titulo: El Mundo de Sofía
+autor: Jostein Gaardner
+genero: Filosofía
+fecha_publicación: 1991
+imagen: el_mundo_de_Sofia.jpg
+resumen: **"El Mundo de Sofía"** de Jostein Gaarder es una novela que narra la historia de Sofía Amundsen, una joven noruega que recibe misteriosas notas con preguntas filosóficas. Estas notas son parte de un curso de filosofía que toma por correspondencia, impartido por un personaje llamado Alberto Knox. La novela explora la historia de la filosofía, desde los presocráticos hasta el existencialismo, a través de las lecciones de Alberto. 
+
+ISERT INTO nombreTabla (campo1, campo2, campo3) VALUES ("1", "2", "3")
+
+Para eliminar un libro por su id 
+DELETE FROM nombreTabla WHERE condicion
+
+Eliminar todos los libros no disponibles
+DELETE FROM libros WHERE disponible = 0
+
+Elimina el libro con id = 8
+DELETE FROM libros WHERE id = 8;

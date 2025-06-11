@@ -1,0 +1,3 @@
+//Se ignoran los datos de la base de datos en GitHub
+
+config/database.php

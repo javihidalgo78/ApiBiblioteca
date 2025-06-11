@@ -1,0 +1,365 @@
+/* Importar fuentes elegantes tipo handwriting de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Kaushan+Script&family=Great+Vibes&display=swap');
+
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e7ecf3;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 95%;
+    width: 95%;
+    margin: 2rem auto;
+    background-color: #ebe4e4;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Título con fuente handwriting elegante */
+.container h1 {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    color: #19351d;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    letter-spacing: 2px;
+}
+
+/* Tabla */
+.tablaLibros {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    padding-top: 2rem;
+}
+
+.tablaLibros thead {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Encabezados de tabla con fuente handwriting */
+.tablaLibros th {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.tablaLibros th, .tablaLibros td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternar colores de filas - ELIMINADO para que se vean los colores de columna */
+/* .tablaLibros tbody tr:nth-child(even) {
+    background-color: #fafafa;
+} */
+
+/* Colores de fondo para cada columna */
+.tablaLibros th:nth-child(1), .tablaLibros td:nth-child(1) {
+    background-color: #e8f4f8; /* Azul muy claro */
+}
+
+.tablaLibros th:nth-child(2), .tablaLibros td:nth-child(2) {
+    background-color: #f0f8e8; /* Verde muy claro */
+}
+
+.tablaLibros th:nth-child(3), .tablaLibros td:nth-child(3) {
+    background-color: #fff8e1; /* Amarillo muy claro */
+}
+
+.tablaLibros th:nth-child(4), .tablaLibros td:nth-child(4) {
+    background-color: #fce4ec; /* Rosa muy claro */
+}
+
+.tablaLibros th:nth-child(5), .tablaLibros td:nth-child(5) {
+    background-color: #f3e5f5; /* Púrpura muy claro */
+}
+
+.tablaLibros th:nth-child(6), .tablaLibros td:nth-child(6) {
+    background-color: #e0f2f1; /* Verde menta muy claro */
+}
+
+.tablaLibros th:nth-child(7), .tablaLibros td:nth-child(7) {
+    background-color: #fff3e0; /* Naranja muy claro */
+}
+
+.tablaLibros th:nth-child(8), .tablaLibros td:nth-child(8) {
+    background-color: #f1f8e9; /* Verde lima muy claro */
+}
+
+.tablaLibros th:nth-child(9), .tablaLibros td:nth-child(9) {
+    background-color: #e8eaf6; /* Índigo muy claro */
+}
+
+.tablaLibros th:nth-child(10), .tablaLibros td:nth-child(10) {
+    background-color: #fafafa; /* Gris muy claro */
+}
+
+/* Hover para todas las filas - debe ir DESPUÉS del nth-child para tener mayor especificidad */
+.tablaLibros tbody tr:hover {
+    background-color: #a1d22c !important;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover para todas las columnas - mantener colores de columna pero más intensos */
+.tablaLibros tbody tr:hover td:nth-child(1) { background-color: #b3d9e6 !important; }
+.tablaLibros tbody tr:hover td:nth-child(2) { background-color: #c8e6c9 !important; }
+.tablaLibros tbody tr:hover td:nth-child(3) { background-color: #fff59d !important; }
+.tablaLibros tbody tr:hover td:nth-child(4) { background-color: #f8bbd9 !important; }
+.tablaLibros tbody tr:hover td:nth-child(5) { background-color: #e1bee7 !important; }
+.tablaLibros tbody tr:hover td:nth-child(6) { background-color: #a7e0db !important; }
+.tablaLibros tbody tr:hover td:nth-child(7) { background-color: #ffcc80 !important; }
+.tablaLibros tbody tr:hover td:nth-child(8) { background-color: #dcedc8 !important; }
+.tablaLibros tbody tr:hover td:nth-child(9) { background-color: #c5cae9 !important; }
+.tablaLibros tbody tr:hover td:nth-child(10) { background-color: #e0e0e0 !important; }
+
+/* Estilos para las imágenes de los libros con efecto hover */
+.tablaLibros td img {
+    border-radius: 5px;
+    max-height: 60px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Efecto hover para ampliar las imágenes */
+.tablaLibros td img:hover {
+    transform: scale(3.5);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    position: relative;
+}
+
+.header {
+    background-color: #007bff;
+
+}
+
+/* Celdas con datos especiales */
+.tablaLibros td:nth-child(6), 
+.tablaLibros td:nth-child(7) {
+    text-align: center;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.tablaLibros td:nth-child(7) {
+    color: #dc3545;
+}
+
+/* Resumen recortado */
+.tablaLibros td:last-child {
+    font-style: italic;
+    color: #555;
+}
+
+/* Estilos para botones */
+.tablaLibros button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin: 20px;
+
+}
+
+/* Botón Editar */
+.tablaLibros button:not(.btn-delete) {
+    background-color: #007bff;
+    color: white;
+}
+
+.tablaLibros button:not(.btn-delete):hover {
+    background-color: #0056b3;
+}
+
+/* Botón Eliminar */
+.tablaLibros .btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.tablaLibros .btn-delete:hover {
+    background-color: #c82333;
+}
+
+/* Centrar botones en sus celdas */
+.tablaLibros td:has(button) {
+    text-align: center;
+}
+
+/* Evitar que el hover afecte a las celdas con botones si se desea */
+.tablaLibros tbody tr:hover td:has(button) {
+    background-color: transparent;
+}
+
+/* Estilos generales para la barra de filtros */
+#filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+/* Estilo para el input de búsqueda */
+#busqueda {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 220px;
+    transition: border-color 0.3s;
+}
+
+#busqueda:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Estilos para los selectores de filtros */
+#filtroDisponibilidad,
+#filtroFavorito {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+#filtroDisponibilidad:focus,
+#filtroFavorito:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Controles de paginación */
+#paginacion {
+    margin-top: 20px;
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#paginacion button {
+    padding: 6px 12px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+#paginacion button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+#paginacion button[style*="font-weight:bold"] {
+    background-color: #007bff;
+    color: white;
+}
+
+.panelCrear.btn-crear{
+text-align: right;
+padding: 1rem ;
+}
+
+form{
+    display:none;
+}
+
+form {
+    max-width: 500px;
+    margin: 1rem auto;
+    background: #f8f8f8;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="file"],
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.checkbox {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     margin: 10px 0;
+}
+
+form input[type="checkbox"] {
+    margin-right: 5px;
+
+}
+
+.panelCrear.btn-crear {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+}
