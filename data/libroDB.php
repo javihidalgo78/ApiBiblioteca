@@ -11,24 +11,24 @@ class LibroDB {
         $this->db = $database->getConexion();
     }
 
-    // Crear tabla si no existe
-    public function createTable() {
-        $sql = "CREATE TABLE IF NOT EXISTS {$this->table} (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            titulo VARCHAR(100) NOT NULL,
-            autor VARCHAR(100) NOT NULL,
-            genero VARCHAR(100) NOT NULL,
-            fecha_publicacion INT(4) NOT NULL,
-            disponible BOOLEAN DEFAULT TRUE,
-            imagen VARCHAR(100),
-            favorito BOOLEAN DEFAULT FALSE,
-            resumen TEXT,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-        )";
+    // Crear tabla si no existe/////////////////////////////////////////////////////////////////////////
+    // public function createTable() {
+    //     $sql = "CREATE TABLE IF NOT EXISTS {$this->table} (
+    //         id INT AUTO_INCREMENT PRIMARY KEY,
+    //         titulo VARCHAR(100) NOT NULL,
+    //         autor VARCHAR(100) NOT NULL,
+    //         genero VARCHAR(100) NOT NULL,
+    //         fecha_publicacion INT(4) NOT NULL,
+    //         disponible BOOLEAN DEFAULT TRUE,
+    //         imagen VARCHAR(100),
+    //         favorito BOOLEAN DEFAULT FALSE,
+    //         resumen TEXT,
+    //         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    //         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    //     )";
                 
-        return $this->db->query($sql);
-    }
+    //     return $this->db->query($sql);
+    // }
 
     //extrae todos los datos de la tabla $table
     public  function getAll(){
@@ -96,19 +96,19 @@ public function create($data){
         //compruebo los datos opcionales
         $genero = isset($data['genero']) ? $data['genero'] : null;
         $fecha_publicacion = isset($data['fecha_publicacion']) ? $data['fecha_publicacion'] : null;
-        $disponible = isset($data['disponible']) ? (int)(bool)$data['disponible'] : 1;
         $imagen = isset($data['imagen']) ? $data['imagen'] : '';
+        $disponible = isset($data['disponible']) ? (int)(bool)$data['disponible'] : 1;
         $favorito = isset($data['favorito']) ? (int)(bool)$data['favorito'] : 0;
         $resumen = isset($data['resumen']) ? $data['resumen'] : null;
 
         $stmt->bind_param(
-            "sssiisis",
+            "sssisiis",
             $data['titulo'],
             $data['autor'],
             $genero,
             $fecha_publicacion,
-            $disponible,
             $imagen,
+            $disponible,
             $favorito,
             $resumen
         );
@@ -127,60 +127,68 @@ public function create($data){
 
 //Actualizar libro
 public function update($id, $data){
-            $sql = "UPDATE {$this->table} SET 
-                titulo = ?, 
-                autor = ?, 
-                genero = ?, 
-                fecha_publicacion = ?, 
-                disponible = ?,
-                imagen = ?,
-                favorito = ?,
-                resumen = ? 
-                WHERE id = ?";
+    $sql = "UPDATE {$this->table} SET 
+        titulo = ?, 
+        autor = ?, 
+        genero = ?, 
+        fecha_publicacion = ?, 
+        imagen = ?,
+        disponible = ?,
+        favorito = ?,
+        resumen = ? 
+        WHERE id = ?";
 
-        //Leer los datos actuales
-        $libro = $this->getById($id);
-        if($libro){
-            return false;
-        }
-
-        $titulo = isset($data["titulo"]) ? $data["titulo"] : $libro['titulo'];
-        $autor = isset($data["autor"]) ? $data["auto"] : $libro['autor'];
-        $genero = isset($data['genero']) ? $data['genero'] : $libro['genero'];
-        $fecha_publicacion = isset($data['fecha_publicacion']) ? $data['fecha_publicacion']   : $libro['fecha_publicacion'];
-        $disponible = isset($data['disponible']) ? (bool)$data['disponible'] : true;
-        $imagen = isset($data['imagen']) ? $data['imagen'] : '';
-        $favorito = isset($data['favorito']) ? (int)(bool)$data['favorito'] : 0;
-        $resumen = isset($data['resumen']) ? $data['resumen'] : '';
-     
-        $stmt = $this->db->prepare($sql);
-        
-        if ($stmt) {
-            
-
-            $stmt->bind_param(
-                "sssiisisi",
-                $titulo,
-                $autor,
-                $genero,
-                $fecha_publicacion,
-                $disponible,
-                $imagen,
-                $favorito,
-                $resumen,
-                $id
-            );
-            
-            if ($stmt->execute()) {
-                $stmt->close();
-                //devuelve todos los datos del libro que actualizar
-                return $this->getById($id);
-            }
-            
-            $stmt->close();
-        }
-        
+    // Leer los datos actuales
+    $libro = $this->getById($id);
+    
+    // CORREGIDO: La lógica estaba invertida
+    if(!$libro){  // Si NO encuentra el libro, retornar false
         return false;
+    }
+
+    // Usar datos nuevos o mantener los existentes
+    $titulo = isset($data["titulo"]) ? $data["titulo"] : $libro['titulo'];
+    // CORREGIDO: Era "auto" en lugar de "autor"
+    $autor = isset($data["autor"]) ? $data["autor"] : $libro['autor'];
+    $genero = isset($data['genero']) ? $data['genero'] : $libro['genero'];
+    $fecha_publicacion = isset($data['fecha_publicacion']) ? $data['fecha_publicacion'] : $libro['fecha_publicacion'];
+    
+    // CORREGIDO: Mantener consistencia con el tipo de datos
+    $disponible = isset($data['disponible']) ? (int)(bool)$data['disponible'] : (int)$libro['disponible'];
+    
+    // Si no viene imagen nueva, mantener la existente
+    $imagen = isset($data['imagen']) ? $data['imagen'] : $libro['imagen'];
+    
+    $favorito = isset($data['favorito']) ? (int)(bool)$data['favorito'] : (int)$libro['favorito'];
+    $resumen = isset($data['resumen']) ? $data['resumen'] : $libro['resumen'];
+ 
+    $stmt = $this->db->prepare($sql);
+    
+    if ($stmt) {
+        // CORREGIDO: Los tipos de parámetros para que coincidan con los datos
+        $stmt->bind_param(
+            "sssisiisi",  // s=string, i=integer
+            $titulo,
+            $autor,
+            $genero,
+            $fecha_publicacion,
+            $imagen,
+            $disponible,      // integer
+            $favorito,        // integer  
+            $resumen,
+            $id               // integer
+        );
+        
+        if ($stmt->execute()) {
+            $stmt->close();
+            // Devolver todos los datos del libro actualizado
+            return $this->getById($id);
+        }
+        
+        $stmt->close();
+    }
+    
+    return false;
 }
 
     // Eliminar un libro

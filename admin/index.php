@@ -11,6 +11,29 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+<!-- Botones con las clases CSS -->
+<div class="search-buttons">
+    <button class="btn btn-primary" onclick="buscarLibros()">
+        🔍 Buscar
+    </button>
+    <button class="btn btn-secondary" onclick="limpiarFiltros()">
+        🗑️ Limpiar
+    </button>
+</div>
+
+<!-- Resto de elementos... -->
+<input type="text" id="buscarTexto">
+<select id="filtroAutor">
+    <option value="">Todos los autores</option>
+</select>
+<!-- ... otros campos ... -->
+<div id="divLibros"></div>
+<div id="paginacion"></div>
+
+
+<div id="divLibros"></div>
+
+
     <div class="container">
     <h1>Panel de control de la Biblioteca</h1>
     <div class="panelCrear">

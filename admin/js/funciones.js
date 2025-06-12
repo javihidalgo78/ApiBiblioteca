@@ -7,7 +7,7 @@ let libroEditandoId = null; // ID del libro que se está editando
 // Servicio para obtener portadas de libros
 class BookCoverService {
     constructor() {
-        this.timeout = 12000; // 12 segundos de timeout
+        this.timeout = 10000; // 10 segundos de timeout
     }
 
     // Helper para crear fetch con timeout
@@ -165,13 +165,14 @@ async function mostrarLibros(datos) {
                     <td>${libro.autor}</td>
                     <td>${libro.genero}</td>
                     <td>${libro.fecha_publicacion}</td>
+                    <td class="centrado">${(libro.disponible == 1) ? "Sí" : "No"}</td>
                     <td>
                         <img id="book-${libro.id}" 
-                             src="../img/peques/${libro.imagen}?${new Date().getTime()}" 
+                             src="../img/Peques/${libro.imagen}?${new Date().getTime()}" 
                              alt="${libro.titulo}" 
                              onerror="this.src='../img/no-cover.jpg'" />
                     </td>
-                    <td class="centrado">${(libro.disponible == 1) ? "Sí" : "No"}</td>
+                    
                     <td class="centrado">${(libro.favorito == 1) ? "Sí" : "No"}</td>
                     <td>${(libro.resumen !== null && libro.resumen.length > 0) ? libro.resumen.substring(0, 100) + "..." : ''}</td>
                     <td>
@@ -224,7 +225,10 @@ function eliminarLibro(id, titulo) {
 
 function libroEliminado(data) {
     if (data.success) {
-        cargarLibros();
+        fetch(url)
+        .then(response => response.json())
+        .then(data => mostrarLibros(data))
+        .catch(error => console.error('Error:', error));
     } else {
         alert("Hubo un problema al eliminar el libro");
     }
@@ -291,7 +295,7 @@ function mostrarImagenActual(imagen, titulo) {
         contenedorImagen.id = 'imagen-actual';
         contenedorImagen.innerHTML = `
             <p>Imagen actual:</p>
-            <img src="../img/peques/${imagen}" alt="${titulo}" style="max-width: 150px; height: auto;" />
+            <img src="../img/Peques/${imagen}" alt="${titulo}" style="max-width: 150px; height: auto;" />
         `;
         
         // Insertar después del campo de imagen
@@ -486,4 +490,6 @@ function resetearModoCreacion() {
         imagenPrevia.remove();
     }
 }
+
+
 }

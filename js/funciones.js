@@ -23,7 +23,7 @@ function mostrarLibros(datos){
         libros.map(libro => `
             <h3>${libro.titulo}</h3>
             <p>${libro.autor}</p>
-            <img src="img/Peques/${libro.Imagen}">
+            <img src="img/Peques/${libro.imagen}">
             <p>${libro.resumen}</p>
             <p>${libro.fecha_publicacion}</p>
             <p>${libro.genero}</p>
@@ -40,3 +40,4 @@ function mostrarLibros(datos){
 
     
 }
+

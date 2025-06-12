@@ -4,7 +4,7 @@ class LibroController {
     private $libroDB;
     private $requestMethod;
     private $libroId;
-
+ 
     public function __construct($db, $requestMethod, $libroId = null)
     {
         $this->libroDB = new LibroDB($db);
